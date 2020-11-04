@@ -1,0 +1,19 @@
+"use strict";
+
+const mongoose = require("mongoose");
+mongoose.Promise = require("bluebird");
+const conf = require("../config");
+
+mongoose.connect(`mongodb://localhost:27017/${conf.dbName}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+// eslint-disable-next-line no-console
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  // eslint-disable-next-line no-console
+  console.log("connected to db coming from models index file");
+});
+
+module.exports = mongoose;

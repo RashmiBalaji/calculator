@@ -1,15 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const cors = require("cors");
-const models = require("./Models/models.js");
 const router = require("./Router/router");
+const models = require("./Models/models");
 
 app.use(cors());
 app.use(express.json());
 app.use(router);
-
 //Setting up a socket with the namespace "connection" for new sockets
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -29,7 +28,7 @@ io.on("connection", (socket) => {
       models
         .find()
         .sort({ _id: -1 })
-        .limit(10)
+        .limit(20)
         .then((doc) => {
           io.emit("send calc", doc);
         });

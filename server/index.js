@@ -9,6 +9,7 @@ const models = require("./Models/models");
 app.use(cors());
 app.use(express.json());
 app.use(router);
+
 //Setting up a socket with the namespace "connection" for new sockets
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -28,11 +29,11 @@ io.on("connection", (socket) => {
       models
         .find()
         .sort({ _id: -1 })
-        .limit(20)
+        .limit(10)
         .then((doc) => {
           io.emit("send calc", doc);
         });
-    }, 1000);
+    }, 500);
 
     //A namespace "disconnect" for when a client disconnects
     socket.on("disconnect", () => {
@@ -40,9 +41,9 @@ io.on("connection", (socket) => {
       socket.removeAllListeners();
     });
   });
+});
 
-  server.listen(3001, function (err) {
-    if (err) throw err;
-    console.log("listening on port 3001");
-  });
+server.listen(3001, function (err) {
+  if (err) throw err;
+  console.log("Server listening on port 3001 🚀");
 });

@@ -13,7 +13,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   // eslint-disable-next-line no-console
-  console.log("connected to db coming from models index file");
+  console.log("Connected to db");
 });
 
 module.exports = mongoose;

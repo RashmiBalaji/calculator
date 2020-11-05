@@ -1,0 +1,19 @@
+button {
+  width: 100px;
+  height: 100px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+button:hover {
+  border: 5px solid white;
+}
+
+.screen {
+  width: 400px;
+  height: 50px;
+  border: 1px white solid;
+  font-style: italic;
+  text-align: right;
+  align-items: center;
+}

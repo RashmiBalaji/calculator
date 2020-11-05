@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
 const conf = require("../config");
 
-mongoose.connect(`mongodb://localhost:27017/${conf.dbName}`, {
+mongoose.connect(process.eventNames.MONGODB_URI || `mongodb://localhost:27017/${conf.dbName}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

@@ -3,8 +3,9 @@ import "./App.css";
 import KeyPad from "./Components/keypad/keypad.js";
 
 import socket from "./Service/Socket.js";
+require('dotenv').config();
 
-const baseURL = "http://localhost:3001";
+const baseURL = process.env.PORT || "http://localhost:3001";
 
 const App = () => {
   const [operations, setOperations] = useState([]);

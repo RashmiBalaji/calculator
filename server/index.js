@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -5,6 +6,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const router = require("./Router/router");
 const models = require("./Models/models");
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());

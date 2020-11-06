@@ -8,8 +8,8 @@
     "build": "concurrently \"cd client && npm run build\" \"npm build \"",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "cd ./client && node index.js",
-    "client": "cd ./client && npm start ",
+    "start": "cd ./client/src && node index.js",
+    "client": "cd ./client/src && npm start ",
     "server-prod": "node index.js",
     "server": "nodemon index.js",
     "start:dev": "concurrently --kill-others  \"npm run client\" \"npm run server\""

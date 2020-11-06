@@ -11,7 +11,8 @@
     "start": "cd ./server && node index.js",
     "client": "cd ./client && npm start",
     "server-prod": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",

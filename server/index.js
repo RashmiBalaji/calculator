@@ -6,7 +6,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const router = require("./Router/router");
 const models = require("./Models/models");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use(router);
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static('client/build'));
   //
   app.get('*', (req, res) => {
     res.sendfile(path.join(__dirname = 'client/build/index.html'));
@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, function (err) {
+server.listen(PORT, function (err) {
   if (err) throw err;
-  console.log("Server listening on port 3001 🚀");
+  console.log(`Server listening on ${PORT} 🚀`);
 });

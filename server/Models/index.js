@@ -3,9 +3,8 @@
 const mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
 const conf = require("../config");
-const uri = "mongodb+srv://dbUser:N2FS07XlSFSQWT0P@cluster0.jvlri.mongodb.net/CalcDB?retryWrites=true&w=majority"
 
-mongoose.connect(uri || `mongodb://localhost:27017/${conf.dbName}`, {
+mongoose.connect(MONGODB_URI || `mongodb://localhost:27017/${conf.dbName}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

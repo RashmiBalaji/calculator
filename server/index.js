@@ -16,11 +16,11 @@ app.use(router);
 
 //for rendering the files under build folder for production after deployment
 if(process.env.NODE_ENV === 'production') {
-  app.use(express.static('../../client/build'));
+  app.use(express.static(__dirname+'/client/build'));
 
-  app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-  });
+  app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 }
 
 //Setting up a socket with the namespace "connection" for new sockets

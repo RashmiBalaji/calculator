@@ -16,46 +16,46 @@ app.use(router);
 
 //for rendering the files under build folder for production after deployment
 if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname+'/client/build'));
+  app.use(express.static(path.join(__dirname+'/client/build')));
+
+  //Setting up a socket with the namespace "connection" for new sockets
+  io.on("connection", (socket) => {
+    console.log("New client connected");
+
+    //to listen on a new namespace called "send calc"
+    socket.on("send calc", (data) => {
+      //to save the incoming data on db
+      var operationItem = new models({ resultString: data });
+
+      operationItem.save(function (err, doc) {
+        if (err) return console.error(err);
+        console.log("Document inserted sucessfully");
+      });
+
+
+      //to find recent ten entries from db and to broadcast it to all sockets
+      setTimeout(function () {
+        models
+          .find()
+          .sort({ _id: -1 })
+          .limit(10)
+          .then((doc) => {
+            io.emit("send calc", doc);
+          });
+      }, 500);
+
+      //A namespace "disconnect" for when a client disconnects
+      socket.on("disconnect", () => {
+        console.log("Client disconnected");
+        socket.removeAllListeners();
+      });
+    });
+  });
 
   app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 }
-
-//Setting up a socket with the namespace "connection" for new sockets
-io.on("connection", (socket) => {
-  console.log("New client connected");
-
-  //to listen on a new namespace called "send calc"
-  socket.on("send calc", (data) => {
-    //to save the incoming data on db
-    var operationItem = new models({ resultString: data });
-
-    operationItem.save(function (err, doc) {
-      if (err) return console.error(err);
-      console.log("Document inserted sucessfully");
-    });
-
-
-    //to find recent ten entries from db and to broadcast it to all sockets
-    setTimeout(function () {
-      models
-        .find()
-        .sort({ _id: -1 })
-        .limit(10)
-        .then((doc) => {
-          io.emit("send calc", doc);
-        });
-    }, 500);
-
-    //A namespace "disconnect" for when a client disconnects
-    socket.on("disconnect", () => {
-      console.log("Client disconnected");
-      socket.removeAllListeners();
-    });
-  });
-});
 
 server.listen(PORT, function (err) {
   if (err) throw err;

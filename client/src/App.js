@@ -5,7 +5,7 @@ import KeyPad from "./Components/keypad/keypad.js";
 import socket from "./Service/Socket.js";
 require('dotenv').config();
 
-const baseURL = process.env.PORT || "http://localhost:3001";
+const baseURL = "https://calculation-stream-app.herokuapp.com" || "http://localhost:3001";
 
 
 

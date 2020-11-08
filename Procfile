@@ -1,2 +1,2 @@
-web: npm run build-client && node server/index.js
+web: npm run install-client && node server/index.js
 

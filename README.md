@@ -5,6 +5,11 @@ The client side of the project was bootstrapped with [Create React App](https://
 
 This project was created using React with socket.io-client for the front-end, Express with socket.io for the back-end server and mongodb with Mongoose for the database. 
 
+## Project Clip
+<p align="center">
+  <img src="client/src/assets/calculator.gif" />
+</p>
+
 # Running the application
 Ensure to install mongodb and mongoose globally (before running the project) by using the following commands (for mac) using homebrew. Since the web application is not hosted/deployed, there is a need for this installation.
 `brew update`
